@@ -1,3 +1,64 @@
 h1{
-  color: blue
+  color: orange
 }
+
+h2{
+  color:aquamarine
+}
+.header{
+  padding: 10px;
+  border-bottom: 2px solid #ddd;
+}
+
+.header .inner-logo img{
+  max-width: 60%;
+}
+
+.header .inner-menu ul{
+  padding: 0px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.header .inner-menu ul li{
+  margin-left: 20px;
+}
+
+
+.footer{
+  background: #000;
+  color: #fff;
+  text-align: center;
+}
+
+/* product */
+
+.container .row .product-item {
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  max-width: 185px;
+}
+
+
+.container .row .product-item .inner-content .inner-title{
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.product-item .inner-content .inner-price{
+  color: green;
+  font-size: 10px;
+}
+
+.product-item .inner-content .inner-desc{
+  color: pink;
+  font-size: 20px;
+  font-weight: 500px;
+}
+
+/* end product */
