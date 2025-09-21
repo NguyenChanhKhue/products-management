@@ -4,8 +4,8 @@ module.exports.index =  async (req, res) => {
 
     const products = await Product.find({
         // loc ra cac ban ghi co status : "active"
-        status: "active",
-        deleted: false
+        // status: "active",
+        // deleted: false
     });
     console.log(products)
     res.render("client/pages/products/index",{
