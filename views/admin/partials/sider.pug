@@ -1,52 +1,7 @@
-.main-wrapper
-  .sidebar
-    ul.sidebar-menu
-      li
-        a(href=`/admin/dashboard`) 📊 Dashboard
-      li
-        a(href=`/admin/products`) 📦 Sản phẩm
-      
-  
-  table.table 
-    thead 
-      tr 
-        th STT
-        th Hình ảnh
-        th Tiêu đề
-        th Giá
-        th Trạng thái
-    
-    tbody 
-      tr 
-        td 1
-        td
-         img(src="https://cdn.dummyjson.com/product-images/furniture/annibale-colombo-sofa/1.webp"
-         alt="LOGO"
-         width="100px"
-         height="auto"
-         )
-         
-        td Sản phẩm 1
-        td 3.4$
-        td 
-          a(href="#" class="badge badge-success")  Hoạt động
-        td 
-          button(class="btn btn-warning" style="margin-right:10px") Sửa
-          button(class="btn btn-danger") Xoá
-      tr 
-        td 2
-        td
-         img(src="https://cdn.dummyjson.com/product-images/furniture/knoll-saarinen-executive-conference-chair/1.webp"
-         alt="LOGO"
-         width="100px"
-         height="auto"
-         )
-         
-        td Sản phẩm 2
-        td 5.3$
-        td 
-          a(href="#" class="badge badge-danger") Dừng hoạt động 
-        td 
-          button(class="btn btn-warning" style="margin-right:10px") Sửa
-          button(class="btn btn-danger") Xoá
-
+.sidebar
+  nav.sidebar-nav
+    ul.nav-list
+      li.nav-item
+        a.nav-link(href="/admin/dashboard") Tổng quan
+      li.nav-item
+        a.nav-link(href="/admin/products") Sản phẩm
