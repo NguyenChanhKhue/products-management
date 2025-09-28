@@ -1,37 +1,16 @@
 const Products = require("../../models/product.models")
 
+const fillterStatusHelper = require("../../helpers/fillterStatus")
+
 // [GET] /admin/products
 module.exports.products = async (req, res) => {
+  // tạo ra 1 obj có property là obj =  {products : async}
   // console.log(req.query.status) lay ra trang thai khi press vao button (active , inactive)
 
-  // lưu các trạng thái button để render ra giao diện
-  let fillterStatus = [
-    {
-      name: "Tất cả",
-      status: "",
-      class: "",
-    },
-    {
-      name: "Hoạt động",
-      status: "active",
-      class: "",
-    },
-    {
-      name: "Dừng hoạt động",
-      status: "inactive",
-      class: "",
-    }
-  ]
+  //Bộ lọc
+  const fillterStatus = fillterStatusHelper(req.query)
 
-  // xử lý hiển thị màu cho button khi ấn vào
-  if (req.query.status){
-    const index = fillterStatus.findIndex(item => item.status == req.query.status); // tìm ra nút có status == status truyền vào url (khi ấn button)
-    fillterStatus[index].class = "active"; // truyền active cho class đó
-  }else{
-    const index = fillterStatus.findIndex(item => item.status == ""); // button "tất cả"  
-    fillterStatus[index].class = "active";
-  }
-
+  console.log(fillterStatus)
 
   let find = {
     // dung de loc ra cac san pham
@@ -48,7 +27,7 @@ module.exports.products = async (req, res) => {
   if(req.query.keyword){
     keyword = req.query.keyword
 
-    const regex = new RegExp(keyword , "i") // tim tat ca cac san pham lien quan
+    const regex = new RegExp(keyword , "i") // tim tat ca cac san pham lien quan , (i : k phan biet hoa thuong)
 
     find.title = regex  // truyen keyword la title de loc ra san pham
   }
