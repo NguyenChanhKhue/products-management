@@ -1,6 +1,7 @@
 const Products = require("../../models/product.models")
 
 const fillterStatusHelper = require("../../helpers/fillterStatus")
+const SearchHelper = require("../../helpers/search")
 
 // [GET] /admin/products
 module.exports.products = async (req, res) => {
@@ -22,22 +23,21 @@ module.exports.products = async (req, res) => {
     find.status = req.query.status  // truyền active vào find để lọc ra sản phẩm
   }
 
-  let keyword ="" // luu tu khoa nguoi dung nhap vao o tim kiem
+  // Search sp
+  const objSearch = SearchHelper(req.query)
 
-  if(req.query.keyword){
-    keyword = req.query.keyword
-
-    const regex = new RegExp(keyword , "i") // tim tat ca cac san pham lien quan , (i : k phan biet hoa thuong)
-
-    find.title = regex  // truyen keyword la title de loc ra san pham
+  if(objSearch.regex){
+    find.title = objSearch.regex
   }
-    
+
+
+
   const products = await Products.find(find)
   // console.log(products)
   res.render("admin/pages/products/index",{
     pageTitle: "Danh sách sản phẩm ",
     products:products,
     fillterStatus:fillterStatus,
-    keyword:keyword
+    keyword:objSearch.keyword
   })
  }
