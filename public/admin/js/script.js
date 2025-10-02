@@ -38,3 +38,17 @@ if(buttonStatus.length > 0){
     })
   }
 // end form search
+
+// pagination
+const buttonPaginations = document.querySelectorAll("[button-pagination]")
+if(buttonPaginations){
+  let url = new URL(location.href) 
+  buttonPaginations.forEach(button => {
+    button.addEventListener('click' , () => {
+      const pageNum = button.getAttribute("button-pagination")
+      url.searchParams.set('page' , pageNum)
+      location.href = url.href
+    })
+  })
+}
+// end pagination

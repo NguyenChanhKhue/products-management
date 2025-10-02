@@ -113,4 +113,8 @@ body {
   .main {
     padding: 15px;
   }
+  .btn.button-warning{
+    margin-right:10px;
+    margin-bottom: 10px;
+  }
 }

@@ -11,7 +11,6 @@ module.exports.products = async (req, res) => {
   //Bộ lọc
   const fillterStatus = fillterStatusHelper(req.query)
 
-  console.log(fillterStatus)
 
   let find = {
     // dung de loc ra cac san pham
@@ -29,15 +28,34 @@ module.exports.products = async (req, res) => {
   if(objSearch.regex){
     find.title = objSearch.regex
   }
+  // End search
+
+  //pagination phân trang 
+  let objPagination = {
+    currentPage : 1,
+    itemsLimit : 4
+  }
+
+  if(req.query.page){
+    objPagination.currentPage = parseInt(req.query.page)
+  }
+  objPagination.skip = (objPagination.currentPage - 1) * objPagination.itemsLimit
+  
+  const countProducts = await Products.countDocuments(find) // total products
 
 
+  const totalPage = Math.ceil(countProducts / objPagination.itemsLimit)
+  objPagination.totalPages = totalPage
+  // End pagination
 
-  const products = await Products.find(find)
+  const products = await Products.find(find).limit(objPagination.itemsLimit).
+  skip(objPagination.skip)
   // console.log(products)
   res.render("admin/pages/products/index",{
     pageTitle: "Danh sách sản phẩm ",
     products:products,
     fillterStatus:fillterStatus,
-    keyword:objSearch.keyword
+    keyword:objSearch.keyword,
+    pagination : objPagination
   })
  }
