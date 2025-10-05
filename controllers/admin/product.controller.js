@@ -53,4 +53,17 @@ module.exports.products = async (req, res) => {
     keyword:objSearch.keyword,
     pagination : objPagination
   })
- }
+}
+
+// [GET] /admin/products/change-status/:status/:id
+module.exports.changeStatus = async (req , res) => {
+  console.log(req.params)
+  const status = req.params.status
+  const id = req.params.id 
+  
+
+  await Products.updateOne({_id: id} , {status: status}) // update san pham dua vao id , va update field status
+
+  res.redirect(`/admin/products`)
+
+}
