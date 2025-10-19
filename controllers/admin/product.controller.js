@@ -55,7 +55,7 @@ module.exports.products = async (req, res) => {
   })
 }
 
-// [GET] /admin/products/change-status/:status/:id
+// [PATCH] /admin/products/change-status/:status/:id
 module.exports.changeStatus = async (req , res) => {
   console.log(req.params)
   const status = req.params.status
@@ -64,6 +64,17 @@ module.exports.changeStatus = async (req , res) => {
 
   await Products.updateOne({_id: id} , {status: status}) // update san pham dua vao id , va update field status
 
-  res.redirect(`/admin/products`)
+  res.redirect(`/admin/products`) // reload trang lai ve duong dan nay
+
+}
+
+// [DELETE] /admin/products/delete/:id
+module.exports.deleteItem = async (req , res) => {
+  const id = req.params.id 
+  
+
+  await Products.deleteOne({_id: id})
+
+  res.redirect(`/admin/products`) // reload trang lai ve duong dan nay
 
 }
