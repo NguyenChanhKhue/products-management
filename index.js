@@ -10,10 +10,13 @@ const routeAdmin = require("./routes/admin/index.route")
 
 const systemConfig = require('./config/system.js')
 
+
+
 database.connect()
 
 const app = express()
 const port = process.env.PORT
+
 
 app.use(methodOverride('_method')) // ghi de method (html chi co get , post)
 // app locals variable
@@ -26,8 +29,6 @@ app.set('views', './views')
 app.set('view engine', 'pug')
 
 app.use(express.static('public')) // file tĩnh
-
-
 
 // routesClient
 route(app);
