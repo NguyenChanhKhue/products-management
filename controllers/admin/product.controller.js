@@ -1,5 +1,7 @@
 const Products = require("../../models/product.models")
 
+const systemConfig = require("../../config/system")
+
 const fillterStatusHelper = require("../../helpers/fillterStatus")
 const SearchHelper = require("../../helpers/search")
 const paginationHelper = require("../../helpers/pagination")
@@ -77,4 +79,32 @@ module.exports.deleteItem = async (req , res) => {
 
   res.redirect(`/admin/products`) // reload trang lai ve duong dan nay
 
+}
+
+// [GET] /admin/products/create
+module.exports.create = async (req , res ) => {
+  res.render("admin/pages/products/create",{
+      pageTitle: "Trang tạo sản phẩm "
+  })
+}
+
+
+// [POST] /admin/products/create
+module.exports.createProducts = async (req , res ) => {
+  req.body.price = parseInt(req.body.price)
+  req.body.discountPercentage = parseInt(req.body.discountPercentage)
+  req.body.stock = parseInt(req.body.stock)
+
+  if(req.body.position == ""){
+    const countProduct = await Products.countDocuments()
+    req.body.position = countProduct + 1
+  }else{
+    req.body.position = parseInt(req.body.position)
+  }
+
+  // Tạo mới 1 sản  phẩm , truyền params vào cho database đó 
+  const product = new Products(req.body)
+  await product.save()
+
+  res.redirect(`${systemConfig.prefixAdmin}/products`)
 }

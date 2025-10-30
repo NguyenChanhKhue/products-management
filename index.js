@@ -20,11 +20,14 @@ app.use(methodOverride('_method')) // ghi de method (html chi co get , post)
 
 app.locals.prefixAdmin = systemConfig.prefixAdmin
 
+app.use(express.urlencoded({ extended: true })); // Đọc dữ liệu từ form gửi lên sever
 
 app.set('views', './views')
 app.set('view engine', 'pug')
 
 app.use(express.static('public')) // file tĩnh
+
+
 
 // routesClient
 route(app);

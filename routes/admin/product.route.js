@@ -10,4 +10,8 @@ router.patch('/change-status/:status/:id',controller.changeStatus) // đổi tr�
 
 router.delete('/delete/:id',controller.deleteItem) // xoa 1 san pham
 
+router.get('/create', controller.create) // trả về giao diện [GET]
+
+router.post('/create', controller.createProducts) // post 1 sp lên
+
 module.exports = router;
