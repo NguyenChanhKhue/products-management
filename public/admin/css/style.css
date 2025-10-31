@@ -118,3 +118,16 @@ body {
     margin-bottom: 10px;
   }
 }
+
+/*create page*/
+
+.upload-preview {
+  border-radius: 10px;
+  width: 200px;
+  margin-top: 20px;
+  height: auto;
+  border: 1px solid #ddd;
+  padding: 15px;
+}
+
+/*end create page*/

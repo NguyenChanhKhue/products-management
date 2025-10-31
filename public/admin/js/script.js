@@ -1,4 +1,8 @@
-// Button status
+// File này không trực tiếp vào phàn product , chỉ lọc sản phẩm, ...
+
+
+
+// Button status (dùng để lọc các sản phẩm theo status)
 const buttonStatus = document.querySelectorAll("[button-status]")
 
 if(buttonStatus.length > 0){
@@ -21,6 +25,7 @@ if(buttonStatus.length > 0){
 }
 //End button status
 
+
 // form search
   const formSearch = document.querySelector('#form_search')
   if(formSearch){
@@ -39,6 +44,7 @@ if(buttonStatus.length > 0){
   }
 // end form search
 
+
 // pagination
 const buttonPaginations = document.querySelectorAll("[button-pagination]")
 if(buttonPaginations){
@@ -52,3 +58,33 @@ if(buttonPaginations){
   })
 }
 // end pagination
+
+
+// upload image
+
+const uploadImgage = document.querySelector("[upload-image]")
+const uploadImgInput = document.querySelector("[upload-img-input]")
+const uploadImgPreview = document.querySelector("[upload-img-preview]")
+
+if(uploadImgage){
+  uploadImgInput.addEventListener("change" , (e) => {
+    console.log(e)
+    const file = e.target.files[0] // lay ra anh dau tien , 1 object
+    if(file){
+      uploadImgPreview.src = URL.createObjectURL(file) // truyen file vao src
+    }
+  })
+}
+
+// cancel image
+const cancelImage = document.querySelector("#cancel-image")
+if(cancelImage){
+  cancelImage.addEventListener("click" , (e) => {
+    uploadImgInput.value = ""
+    uploadImgPreview.src = ""
+  })
+}
+
+// end cancel image
+
+// end upload image

@@ -111,3 +111,4 @@ module.exports.createProducts = async (req , res ) => {
 
   res.redirect(`${systemConfig.prefixAdmin}/products`)
 }
+

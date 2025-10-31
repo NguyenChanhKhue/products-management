@@ -52,13 +52,31 @@ block main
             name="stock"
             value="0"
           )
-        div(class="form-group")
+        div(
+          class="form-group"
+          upload-image
+          )
           lable(for="thumbnail") Ảnh
+
+          button(
+            type="button"
+            id="cancel-image"
+            style="margin-left:100px"
+          ) Huỷ chọn ảnh
+        
           input(
             type="file"
             class="form-control-file"
             id="thumbnail"
-            name="thumbnail"          
+            name="thumbnail"
+            upload-img-input
+                     
+          )
+          
+          img(
+            src=""
+            class="upload-preview"
+            upload-img-preview
           )
         div(class="form-group")
           lable(for="position") Vị trí
