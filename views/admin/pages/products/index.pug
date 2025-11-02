@@ -73,8 +73,12 @@ block main
                     class="badge badge-danger"
                     ) Dừng hoạt động 
               td 
-                button(class="btn btn-warning" style="margin-right:10px") Sửa
-                button(class="btn btn-danger"
+                a(
+                  href=`${prefixAdmin}/products/edit/${item.id}`
+                  class="btn btn-warning"
+                  style="margin-right:10px"                 
+                  ) Sửa
+                button(class="btn btn-danger" 
                       button-delete
                       data-id = item.id) Xoá
   +pagination(pagination)

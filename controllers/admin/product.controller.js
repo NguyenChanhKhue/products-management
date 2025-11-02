@@ -73,9 +73,18 @@ module.exports.changeStatus = async (req , res) => {
 // [DELETE] /admin/products/delete/:id
 module.exports.deleteItem = async (req , res) => {
   const id = req.params.id 
-  
 
-  await Products.deleteOne({_id: id})
+  // await Products.deleteOne({_id: id})  Xoá cứng 1 sản phầm , xoá thẳng trong db
+ 
+
+  // xoa mem , chi xoa ngoai front end
+  await Products.updateOne(
+    {_id:id},
+    {
+      deleted: true,
+      deletedAt: new Date()
+    }
+  )
 
   res.redirect(`/admin/products`) // reload trang lai ve duong dan nay
 
@@ -91,7 +100,7 @@ module.exports.create = async (req , res ) => {
 
 // [POST] /admin/products/create
 module.exports.createProducts = async (req , res ) => {
-  console.log(req.file)
+
   req.body.price = parseInt(req.body.price)
   req.body.discountPercentage = parseInt(req.body.discountPercentage)
   req.body.stock = parseInt(req.body.stock)
@@ -103,8 +112,10 @@ module.exports.createProducts = async (req , res ) => {
     req.body.position = parseInt(req.body.position)
   }
 
-  req.body.thumbnail = `/uploads/${req.file.filename}` // luu anh vao field thumbnail trong database
-
+  // check xem có up ảnh không , có mới lưu vào , nếu không check sẽ bị lỗi
+  if(req.file){
+    req.body.thumbnail = `/uploads/${req.file.filename}` // luu anh vao field thumbnail trong database
+  }
   // Tạo mới 1 sản  phẩm , truyền params vào cho database đó 
   const product = new Products(req.body)
   await product.save()
@@ -112,3 +123,43 @@ module.exports.createProducts = async (req , res ) => {
   res.redirect(`${systemConfig.prefixAdmin}/products`)
 }
 
+// [GET] /admin/products/edit/:id
+module.exports.edit = async (req , res ) => {
+  try {
+    const find = {
+    deleted: false ,
+    _id: req.params.id,
+  }
+
+    const product = await Products.findOne(find);
+
+    res.render("admin/pages/products/edit",{
+        pageTitle: "trang sửa sản phẩm ",
+        product:product
+    })
+  } catch (error) {
+    res.redirect("products")
+  }
+}
+
+// [PATCH] /admin/products/edit/:id
+module.exports.editPatch = async (req , res ) => {
+  req.body.price = parseInt(req.body.price)
+  req.body.discountPercentage = parseInt(req.body.discountPercentage)
+  req.body.stock = parseInt(req.body.stock)
+  req.body.position =parseInt(req.body.position)
+
+
+  // check xem có up ảnh không , có mới lưu vào , nếu không check sẽ bị lỗi
+  if(req.file){
+    req.body.thumbnail = `/uploads/${req.file.filename}` // luu anh vao field thumbnail trong database
+  }
+  try {
+    await Products.updateOne(
+      {_id:req.params.id}, req.body) // update san pham , key la id
+  } catch (error) {
+    
+  }
+
+  res.redirect(`${systemConfig.prefixAdmin}/products/edit/${req.params.id}`)
+}

@@ -6,6 +6,8 @@ const storageMulter = require('../../helpers/storageMulter')
 const multer  = require('multer') // upload file 
 const upload = multer({ storage: storageMulter()})
 
+const validate = require("../../validate/admin/product.validate")
+
 const controller = require("../../controllers/admin/product.controller") // controller = {products : asyncfuntion}
 router.get('/',controller.products)
 
@@ -16,6 +18,24 @@ router.delete('/delete/:id',controller.deleteItem) // xoa 1 san pham
 
 router.get('/create', controller.create) // trả về giao diện [GET]
 
-router.post('/create', upload.single('thumbnail') ,controller.createProducts) // post 1 sp lên
+router.post(
+    '/create', upload.single('thumbnail'),
+    validate.createPost, // giống như middleware , check xem co thoả validate không rồi mới tạo sản phẩm
+    controller.createProducts
+
+) // post 1 sp lên
+
+// sửa sản phẩm
+
+router.get('/edit/:id', controller.edit)
+
+router.patch(
+    '/edit/:id',
+    upload.single('thumbnail'),
+    validate.createPost,
+    controller.editPatch,
+    
+) // chinh sua
+
 
 module.exports = router;
