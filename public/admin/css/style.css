@@ -7,6 +7,9 @@
 body {
   font-family: Arial, sans-serif;
   background-color: #f5f5f5;
+  font-weight: 300 !important; /* Mỏng hơn */
+  font-size: 14px !important; /* Nhỏ hơn mặc định 16px */
+
 }
 
 /* Header - Chiều ngang */

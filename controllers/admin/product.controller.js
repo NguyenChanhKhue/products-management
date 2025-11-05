@@ -154,6 +154,7 @@ module.exports.editPatch = async (req , res ) => {
   if(req.file){
     req.body.thumbnail = `/uploads/${req.file.filename}` // luu anh vao field thumbnail trong database
   }
+  
   try {
     await Products.updateOne(
       {_id:req.params.id}, req.body) // update san pham , key la id
@@ -162,4 +163,25 @@ module.exports.editPatch = async (req , res ) => {
   }
 
   res.redirect(`${systemConfig.prefixAdmin}/products/edit/${req.params.id}`)
+}
+
+// [GET] /admin/products/detail/:id
+module.exports.detail = async (req , res ) => {
+  try {
+    const find = {
+    deleted: false ,
+    _id: req.params.id,
+  }
+
+    const product = await Products.findOne(find);
+
+    console.log(product)
+
+    res.render("admin/pages/products/detail",{
+        pageTitle:product.title,
+        product:product
+    })
+  } catch (error) {
+    res.redirect("products")
+  }
 }
