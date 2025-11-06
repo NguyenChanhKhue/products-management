@@ -1,10 +1,13 @@
-h1{
-  color: orange
+h2 {
+  font-weight: normal;
 }
 
-h2{
-  color:aquamarine
+h2 b {
+  font-weight: bold;
+  color: #212529; /* đậm hơn 1 chút */
 }
+
+
 .header{
   padding: 10px;
   border-bottom: 2px solid #ddd;
@@ -45,7 +48,8 @@ h2{
 }
 
 .container .product-item .inner-image img{
-  width: 100px;
+  width: 150px;
+  height: 100px;
 }
 
 .container .row .product-item .inner-content .inner-title{
@@ -55,12 +59,21 @@ h2{
 
 .product-item .inner-content .inner-price{
   color: green;
-  font-size: 10px;
+  font-size: 20px;
+}
+
+.product-item .inner-content .inner-discountPercentage{
+  background: orange;
+  width: fit-content;
+  border-radius: 20px;
+  font-size: 20px;
+  font-weight: 400px;
+
 }
 
 .product-item .inner-content .inner-desc{
   color: #000;
-  font-size: 10px;
+  font-size: 15px;
   font-weight: 500px;
 }
 

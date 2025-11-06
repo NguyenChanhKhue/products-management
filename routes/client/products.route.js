@@ -11,5 +11,6 @@ router.get('/',controller.index)
 //create page of products
 router.get('/create' , controller.create)
 
+router.get(`/:slug`, controller.detail)
 
 module.exports = router;
