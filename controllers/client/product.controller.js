@@ -13,12 +13,6 @@ module.exports.index = async (req, res) => {
     })
 }
 
-module.exports.create = (req, res) => {
-    res.render("client/pages/products/create",{
-        pageTitle: "trang create"
-    })
-}
-
 //[GET] /product/:slug
 module.exports.detail = async (req, res) => {
     try {

@@ -25,10 +25,12 @@ app.locals.prefixAdmin = systemConfig.prefixAdmin
 
 app.use(express.urlencoded({ extended: true })); // Đọc dữ liệu từ form gửi lên sever
 
-app.set('views', './views')
+app.set('views', `${__dirname}/views`)
 app.set('view engine', 'pug')
 
-app.use(express.static('public')) // file tĩnh
+console.log(__dirname)
+
+app.use(express.static(`${__dirname}/public`)) // file tĩnh
 
 // routesClient
 route(app);
