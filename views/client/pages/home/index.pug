@@ -1,4 +1,121 @@
-extends ../../layouts/default.pug
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Sản Phẩm</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">🛍️ Khue's Shop</div>
+            <ul class="nav-links">
+                <li><a href="/" class="nav-link active" data-page="home">Trang Chủ</a></li>
+                <li><a href="products" class="nav-link" data-page="products">Sản Phẩm</a></li>
+            </ul>
+        </nav>
+    </header>
 
-block main 
-  h1 Trang chu
+    <main>
+        <!-- Trang Chủ -->
+        <section id="home" class="page-section active">
+            <div class="hero">
+                <h1>Chào Mừng Đến MyShop</h1>
+                <p>Khám phá bộ sưu tập thời trang mới nhất</p>
+                <button class="btn" onclick="showPage('products')">Mua Sắm Ngay</button>
+            </div>
+
+            <h2 class="section-title">Tại Sao Chọn Chúng Tôi?</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">🚚</div>
+                    <h3 class="feature-title">Giao Hàng Nhanh</h3>
+                    <p class="feature-description">Miễn phí vận chuyển cho đơn hàng trên 500.000đ</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💳</div>
+                    <h3 class="feature-title">Thanh Toán An Toàn</h3>
+                    <p class="feature-description">Đa dạng phương thức thanh toán bảo mật</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎁</div>
+                    <h3 class="feature-title">Quà Tặng Hấp Dẫn</h3>
+                    <p class="feature-description">Ưu đãi và quà tặng cho khách hàng thân thiết</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trang Sản Phẩm -->
+        <section id="products" class="page-section">
+            <h2 class="section-title">Sản Phẩm Của Chúng Tôi</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">👕</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Áo Thun Premium</h3>
+                        <p class="product-description">Chất liệu cotton cao cấp, thoáng mát</p>
+                        <div class="product-price">299.000đ</div>
+                        <button class="add-to-cart">Thêm Vào Giỏ</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">👖</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Quần Jean Slim</h3>
+                        <p class="product-description">Thiết kế hiện đại, form dáng ôm vừa</p>
+                        <div class="product-price">599.000đ</div>
+                        <button class="add-to-cart">Thêm Vào Giỏ</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">👟</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Giày Sneaker</h3>
+                        <p class="product-description">Phong cách thể thao, êm ái</p>
+                        <div class="product-price">899.000đ</div>
+                        <button class="add-to-cart">Thêm Vào Giỏ</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🧥</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Áo Khoác Hoodie</h3>
+                        <p class="product-description">Ấm áp, phong cách streetwear</p>
+                        <div class="product-price">699.000đ</div>
+                        <button class="add-to-cart">Thêm Vào Giỏ</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">👗</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Váy Đầm Dự Tiệc</h3>
+                        <p class="product-description">Sang trọng, lịch lãm</p>
+                        <div class="product-price">1.299.000đ</div>
+                        <button class="add-to-cart">Thêm Vào Giỏ</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🎒</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Ba Lô Thời Trang</h3>
+                        <p class="product-description">Tiện dụng, nhiều ngăn</p>
+                        <div class="product-price">499.000đ</div>
+                        <button class="add-to-cart">Thêm Vào Giỏ</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 MyShop. Tất cả quyền được bảo lưu.</p>
+    </footer>
+
+</body>
+</html>
