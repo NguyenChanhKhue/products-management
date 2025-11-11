@@ -112,10 +112,6 @@ module.exports.createProducts = async (req , res ) => {
     req.body.position = parseInt(req.body.position)
   }
 
-  // check xem có up ảnh không , có mới lưu vào , nếu không check sẽ bị lỗi
-  if(req.file){
-    req.body.thumbnail = `/uploads/${req.file.filename}` // luu anh vao field thumbnail trong database
-  }
   // Tạo mới 1 sản  phẩm , truyền params vào cho database đó 
   const product = new Products(req.body)
   await product.save()
