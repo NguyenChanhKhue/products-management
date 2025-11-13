@@ -86,5 +86,49 @@ if(cancelImage){
 }
 
 // end cancel image
-
 // end upload image
+
+
+
+// Sort
+const sort = document.querySelector("[sort]")
+let url = new URL(location.href) 
+if(sort){
+  const sortSelect = sort.querySelector("[sort-select]")
+
+  sortSelect.addEventListener('change', (e)=>{
+    let value = e.target.value.split("-")
+    let sortKey = value[0]
+    let sortValue = value[1]
+
+    url.searchParams.set("sortKey", sortKey)
+    url.searchParams.set("sortValue", sortValue)
+
+    location.href = url.href
+  })
+}
+
+// button clear
+const buttonClear = document.querySelector("[sort-clear]")
+
+buttonClear.addEventListener("click",()=>{
+  url.searchParams.delete("sortKey")
+  url.searchParams.delete("sortValue")
+
+  location.href = url.href
+})
+// end button clear
+
+// them selected cho option (hien thi select sau khi load lai trang khi chon option)
+const sortSelect = document.querySelector("[sort-select]")
+
+const sortKey = url.searchParams.get("sortKey")
+const sortValue = url.searchParams.get("sortValue")
+
+if(sortKey && sortValue){
+  const stringSort = `${sortKey}-${sortValue}`
+
+  const optionSelected = sortSelect.querySelector(`option[value='${stringSort}']`)
+  optionSelected.selected = true;
+}
+// End Sort
