@@ -1,10 +1,9 @@
 const express = require('express')
+var path = require('path');
+
 require('dotenv').config();
-
 const methodOverride = require('method-override')
-
 const database = require("./config/database")
-
 const route = require("./routes/client/index.route")
 const routeAdmin = require("./routes/admin/index.route")
 
@@ -28,7 +27,12 @@ app.use(express.urlencoded({ extended: true })); // Đọc dữ liệu từ form
 app.set('views', `${__dirname}/views`)
 app.set('view engine', 'pug')
 
-console.log(__dirname)
+// tinymce (trinh soan thao van ban)
+app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
+// end tinymce
+
+
+console.log(__dirname)// duong dan thu muc
 
 app.use(express.static(`${__dirname}/public`)) // file tĩnh
 
