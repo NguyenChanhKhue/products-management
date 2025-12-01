@@ -14,6 +14,24 @@ module.exports.productCategories = async (req, res) => {
     // dung de loc ra cac san pham
     deleted: false,
   }
+
+  // 
+  function createTree (arr , parentID = ""){
+    const tree = []
+    arr.forEach((item)=>{
+      if(String(item.parent_id) === String(parentID)){
+        const newItem = item
+        const children = createTree(arr , item.id)
+        if(children.length > 0){
+          newItem.children = children
+        } 
+        tree.push(newItem)
+      }
+    })
+    
+    return tree 
+  }
+
   if (req.query.status) {
     find.status = req.query.status  // truyền active vào find để lọc ra sản phẩm
   }
@@ -52,9 +70,11 @@ module.exports.productCategories = async (req, res) => {
   // End Sort
   const productCategories = await ProductCategories.find(find)
 
+  const newRecord = createTree(productCategories)
+
   res.render("admin/pages/product-categories/index", {
     pageTitle: "Trang danh mục sản phẩm ",
-    productCategories: productCategories,
+    productCategories: newRecord,
     fillterStatus: fillterStatus,
     objPagination: objPagination,
     keyword:objSearch.keyword,
@@ -63,8 +83,34 @@ module.exports.productCategories = async (req, res) => {
 
 // [GET] admin/products-categories/create
 module.exports.create = async (req, res) => {
+
+  const find = {
+    deleted: false
+  }
+
+  function createTree (arr , parentID = ""){
+    const tree = []
+    arr.forEach((item)=>{
+      if(String(item.parent_id) === String(parentID)){
+        const newItem = item
+        const children = createTree(arr , item.id)
+        if(children.length > 0){
+          newItem.children = children
+        } 
+        tree.push(newItem)
+      }
+    })
+    
+    return tree 
+  }
+
+  const records = await ProductCategories.find(find)
+
+  const newRecord = createTree(records)
+
   res.render("admin/pages/product-categories/create", {
-    pageTitle: "Trang tạo danh mục sản phẩm "
+    pageTitle: "Trang tạo danh mục sản phẩm ",
+    records: newRecord
   })
 }
 
@@ -94,8 +140,6 @@ module.exports.detail = async (req , res ) => {
   }
 
     const product = await ProductCategories.findOne(find);
-
-    console.log(product)
 
     res.render("admin/pages/product-categories/detail",{
         pageTitle:product.title,

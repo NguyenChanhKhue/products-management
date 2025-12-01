@@ -2,9 +2,9 @@ extends ../../layouts/default.pug
 include ../../mixins/button-status.pug
 include ../../mixins/search.pug
 include ../../mixins/pagination.pug
-
+include ../../mixins/table-tree.pug
 block main 
-  h1 Danh sách sản phẩm
+  h1 Danh mục sản phẩm
 
   card.mb-3 
     .card-header Lọc và Tìm kiếm 
@@ -54,56 +54,6 @@ block main
             th Hành động
         
         tbody
-          each item , index in productCategories 
-            tr 
-              td #{index+1}
-              td
-                img(src=item.thumbnail
-                alt=item.title
-                width="100px"
-                height="auto"
-                )
-                
-              td #{item.title}
-              td
-                input(
-                  type="number"
-                  value= item.position
-                  style="width: 60px"
-                  min = 1
-                  name="position"
-                  )
-              td 
-                if(item.status == "active")
-                  a( 
-                    href="javascript:;" 
-                    data-status=item.status
-                    data-id = item.id
-                    button-change-status
-                    class="badge badge-success"
-
-                    )  Hoạt động
-                else 
-                  a(
-                    href="javascript:;"
-                    data-status=item.status
-                    data-id = item.id
-                    button-change-status
-                    class="badge badge-danger"
-                    ) Dừng hoạt động 
-                
-              td
-                a(
-                  href=`${prefixAdmin}/product-categories/detail/${item.id}`
-                  class="btn btn-secondary"
-                  style="margin-right:10px"                 
-                  ) Chi tiết
-                a(
-                  href=`${prefixAdmin}/product-categories/edit/${item.id}`
-                  class="btn btn-warning"
-                  style="margin-right:10px"                 
-                  ) Sửa
-                button(class="btn btn-danger" 
-                      button-delete
-                      data-id = item.id) Xoá
+          +table-tree(productCategories, 0)
+          
   script(src="/admin/js/product.js") 
