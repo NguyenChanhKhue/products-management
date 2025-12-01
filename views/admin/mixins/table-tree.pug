@@ -1,10 +1,11 @@
 //- tạo danh mục cha con 
 
-mixin table-tree(items , level)
-  each item , index in items 
+mixin table-tree(items, level, counterObj = {count: 0})
+  each item, index in items 
     - const prefix = Array(level + 1).join(" -- ")
     tr 
-      td #{index+1}
+      td #{counterObj.count + 1}
+      - counterObj.count++
       td
         img(src=item.thumbnail
         alt=item.title
@@ -55,4 +56,4 @@ mixin table-tree(items , level)
               button-delete
               data-id = item.id) Xoá
     if item.children && item.children.length > 0
-      +table-tree(item.children, level + 1)
+      +table-tree(item.children, level + 1, counterObj)
