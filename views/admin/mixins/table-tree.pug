@@ -27,7 +27,7 @@ mixin table-tree(items, level, counterObj = {count: 0})
           a( 
             href="javascript:;" 
             data-status=item.status
-            data-id = item.id
+            data-id = item._id
             button-change-status
             class="badge badge-success"
 
@@ -36,24 +36,24 @@ mixin table-tree(items, level, counterObj = {count: 0})
           a(
             href="javascript:;"
             data-status=item.status
-            data-id = item.id
+            data-id = item._id
             button-change-status
             class="badge badge-danger"
             ) Dừng hoạt động 
         
       td
         a(
-          href=`${prefixAdmin}/product-categories/detail/${item.id}`
+          href=`${prefixAdmin}/product-categories/detail/${item._id}`
           class="btn btn-secondary"
           style="margin-right:10px"                 
           ) Chi tiết
         a(
-          href=`${prefixAdmin}/product-categories/edit/${item.id}`
+          href=`${prefixAdmin}/product-categories/edit/${item._id}`
           class="btn btn-warning"
           style="margin-right:10px"                 
           ) Sửa
         button(class="btn btn-danger" 
               button-delete
-              data-id = item.id) Xoá
+              data-id = item._id) Xoá
     if item.children && item.children.length > 0
       +table-tree(item.children, level + 1, counterObj)

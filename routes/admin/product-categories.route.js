@@ -17,7 +17,7 @@ const controller = require("../../controllers/admin/product-categories.controlle
 
 router.get('/', controller.productCategories)
 
-router.get('/create' , controller.create)
+router.get('/create', controller.create)
 
 router.post(
     '/create', upload.single('thumbnail'),
@@ -29,5 +29,17 @@ router.post(
 
 // chi tiet san pham
 router.get('/detail/:id', controller.detail)
+
+// chinh sua san pham 
+router.get('/edit/:id', controller.edit)
+
+router.patch(
+    '/edit/:id',
+    upload.single('thumbnail'),
+    uploadCloud.upload,
+    validate.createPost,
+    controller.editPatch,
+)
+
 
 module.exports = router;

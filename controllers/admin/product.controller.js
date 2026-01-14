@@ -171,10 +171,11 @@ module.exports.editPatch = async (req , res ) => {
     await Products.updateOne(
       {_id:req.params.id}, req.body) // update san pham , key la id
   } catch (error) {
-    
+    res.redirect(`${systemConfig.prefixAdmin}/products/edit/${req.params.id}`)  
   }
-
   res.redirect(`${systemConfig.prefixAdmin}/products/edit/${req.params.id}`)
+
+
 }
 
 // [GET] /admin/products/detail/:id
