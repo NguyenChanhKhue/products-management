@@ -1,5 +1,5 @@
 extends ../../layouts/default.pug
-
+include ../../mixins/tree-categories.pug
 block main 
     h1(class="mb-4") Trang chỉnh sửa sản phẩm
     
@@ -19,6 +19,17 @@ block main
             required
             value=product.title
           )
+        div(class="form-group")
+          label(for="product_category_id") Danh mục
+          select(
+            name="product_category_id"
+            id="product_category_id"
+            class="form-control"
+          ) 
+            option(value="") --Chọn danh mục cha--
+            
+            if(records)
+              +tree-categories(records ,1 , product.product_category_id)
         div(class="form-group")
           label(for="desc") Mô tả
           textarea(

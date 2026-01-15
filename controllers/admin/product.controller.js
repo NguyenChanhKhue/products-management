@@ -1,10 +1,15 @@
 const Products = require("../../models/product.models")
+const ProductCategories = require("../../models/product-categories.model")
+
 
 const systemConfig = require("../../config/system")
 
 const fillterStatusHelper = require("../../helpers/fillterStatus")
 const SearchHelper = require("../../helpers/search")
 const paginationHelper = require("../../helpers/pagination")
+
+
+const  {createTree}  = require('../../helpers/createTree');
 
 // [GET] /admin/products
 module.exports.products = async (req, res) => {
@@ -108,8 +113,17 @@ module.exports.deleteItem = async (req , res) => {
 
 // [GET] /admin/products/create
 module.exports.create = async (req , res ) => {
+  const find = {
+    deleted: false
+  }
+
+  // bản ghi các danh mục
+  const records = await ProductCategories.find(find)
+
+  const newRecord = createTree(records, "")
   res.render("admin/pages/products/create",{
-      pageTitle: "Trang tạo sản phẩm "
+    pageTitle: "Trang tạo sản phẩm ",
+    records:newRecord
   })
 }
 
@@ -145,9 +159,17 @@ module.exports.edit = async (req , res ) => {
 
     const product = await Products.findOne(find);
 
+    const records = await ProductCategories.find({
+      deleted:false
+    })
+
+
+    const newRecord = createTree(records, "")
+
     res.render("admin/pages/products/edit",{
         pageTitle: "trang sửa sản phẩm ",
-        product:product
+        product:product,
+        records:newRecord
     })
   } catch (error) {
     res.redirect("products")
