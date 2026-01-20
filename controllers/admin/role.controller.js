@@ -93,5 +93,25 @@ module.exports.editPatch = async (req , res) =>{
   res.redirect(`${systemConfig.prefixAdmin}/roles`)
 }
 
+// [DELETE] /admin/roles/delete/:id
+
+module.exports.deletePermission = async (req , res) => {
+  const id = req.params.id 
+
+  // await Products.deleteOne({_id: id})  Xoá cứng 1 sản phầm , xoá thẳng trong db
+ 
+
+  // xoa mem , chi xoa ngoai front end
+  await Role.updateOne(
+    {_id:id},
+    {
+      deleted: true,
+      deletedAt: new Date()
+    }
+  )
+
+  res.redirect(`${systemConfig.prefixAdmin}/roles`) 
+
+}
 
  

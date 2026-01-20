@@ -41,5 +41,7 @@ router.patch(
     controller.editPatch,
 )
 
+// xoa san pham
+router.delete('/delete/:id' , controller.deleteCategory)
 
 module.exports = router;

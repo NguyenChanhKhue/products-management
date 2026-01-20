@@ -107,7 +107,7 @@ module.exports.deleteItem = async (req , res) => {
     }
   )
 
-  res.redirect(`/admin/products`) // reload trang lai ve duong dan nay
+  res.redirect(`${systemConfig.prefixAdmin}/products`) // reload trang lai ve duong dan nay
 
 }
 

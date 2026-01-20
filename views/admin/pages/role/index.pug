@@ -42,6 +42,14 @@ block main
                     class="btn btn-warning"
                     style="margin-right:10px"                 
                     ) Sửa
-                  button(class="btn btn-danger" 
+                  button(class="btn btn-danger"
                         button-delete
                         data-id = item.id) Xoá
+
+  form(
+    action=""
+    method="POST"
+    id="form-delete-item"
+    data-path= `${prefixAdmin}/roles/delete`
+    )
+  script(src="/admin/js/product.js")

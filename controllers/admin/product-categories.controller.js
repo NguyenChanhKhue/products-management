@@ -5,6 +5,7 @@ const fillterStatusHelper = require("../../helpers/fillterStatus")
 const SearchHelper = require("../../helpers/search")
 const paginationHelper = require("../../helpers/pagination")
 const  {createTree}  = require('../../helpers/createTree');
+const { Timestamp } = require('mongodb')
 // [GET] admin/products-categories
 module.exports.productCategories = async (req, res) => {
 
@@ -62,6 +63,7 @@ module.exports.productCategories = async (req, res) => {
     fillterStatus: fillterStatus,
     objPagination: objPagination,
     keyword:objSearch.keyword,
+    prefixAdmin: systemConfig.prefixAdmin
   })
 }
 
@@ -79,7 +81,8 @@ module.exports.create = async (req, res) => {
 
   res.render("admin/pages/product-categories/create", {
     pageTitle: "Trang tạo danh mục sản phẩm ",
-    records: newRecord
+    records: newRecord,
+    prefixAdmin: systemConfig.prefixAdmin
   })
 }
 
@@ -100,7 +103,7 @@ module.exports.createProducts = async (req, res) => {
 
 }
 
-// [GET] /admin/products/detail/:id
+// [GET] /admin/products-categories/detail/:id
 module.exports.detail = async (req , res ) => {
   try {
     const find = {
@@ -112,7 +115,8 @@ module.exports.detail = async (req , res ) => {
 
     res.render("admin/pages/product-categories/detail",{
         pageTitle:product.title,
-        product:product
+        product:product,
+        prefixAdmin: systemConfig.prefixAdmin
     })
   } catch (error) {
     res.redirect("products")
@@ -120,7 +124,7 @@ module.exports.detail = async (req , res ) => {
 }
 
 
-// [GET] /admin/products/edit/:id
+// [GET] /admin/products-categories/edit/:id
 module.exports.edit = async (req , res)=>{
   try{
     const find = {
@@ -141,7 +145,8 @@ module.exports.edit = async (req , res)=>{
     res.render('admin/pages/product-categories/edit',{
       pageTitle : "Trang chinh sua san pham",
       product:product,
-      records:newRecord
+      records:newRecord,
+      prefixAdmin: systemConfig.prefixAdmin
     } )
   }catch{
     res.redirect('product-categories')
@@ -150,7 +155,7 @@ module.exports.edit = async (req , res)=>{
 }
 
 
-// [PATCH] /admin/products/edit/:id
+// [PATCH] /admin/products-categories/edit/:id
 module.exports.editPatch = async (req , res)=>{
   
   req.body.position =parseInt(req.body.position)
@@ -163,4 +168,16 @@ module.exports.editPatch = async (req , res)=>{
   }
   res.redirect(`${systemConfig.prefixAdmin}/product-categories/edit/${req.params.id}`)
 
+}
+
+// [DELETE] /admin/products-categories/delete/:id
+module.exports.deleteCategory = async (req , res) => {
+  await ProductCategories.updateOne(
+    {_id: req.params.id},
+    {
+      deleted:true,
+      deletedAt: new Date()
+    }
+  )
+  res.redirect(`${systemConfig.prefixAdmin}/product-categories`)
 }

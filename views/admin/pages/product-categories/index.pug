@@ -55,5 +55,10 @@ block main
         
         tbody
           +table-tree(productCategories, 0)
-          
+  form(
+    action=""
+    method="POST"
+    id="form-delete-item"
+    data-path= `${prefixAdmin}/product-categories/delete`
+    )      
   script(src="/admin/js/product.js") 

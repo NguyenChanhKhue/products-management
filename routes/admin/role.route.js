@@ -19,4 +19,8 @@ router.patch('/edit/:id', controller.editPatch)
 // chi tiet nhom quyen
 router.get('/detail/:id', controller.detail)
 
+
+// xoá nhóm quyền
+router.delete('/delete/:id', controller.deletePermission)
+
 module.exports = router;

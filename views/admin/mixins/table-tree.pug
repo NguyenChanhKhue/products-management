@@ -52,8 +52,12 @@ mixin table-tree(items, level, counterObj = {count: 0})
           class="btn btn-warning"
           style="margin-right:10px"                 
           ) Sửa
-        button(class="btn btn-danger" 
-              button-delete
-              data-id = item._id) Xoá
+        button(
+          type="button"
+          class="btn btn-danger" 
+          button-delete
+          data-id = item._id
+        ) Xoá
     if item.children && item.children.length > 0
       +table-tree(item.children, level + 1, counterObj)
+  
